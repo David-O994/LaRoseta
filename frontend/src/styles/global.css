@@ -1,0 +1,50 @@
+:root {
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  color: #4a3a3b;
+  background: #fffdfb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --rosa-principal: #e58b9b;
+  --rosa-secundario: #fff0f4;
+  --azul-pastel: #bfd8dd;
+  --marron-texto: #4a3a3b;
+  --crema: #fffdfb;
+  --sombra-suave: 0 16px 40px rgb(74 58 59 / 9%);
+}
+
+body {
+  color: var(--marron-texto);
+  background-color: var(--crema);
+  background-image: radial-gradient(#bfd8dd 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--marron-texto);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  color: var(--marron-texto);
+  background: var(--rosa-secundario);
+}
