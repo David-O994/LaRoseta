@@ -33,7 +33,7 @@ function Pedidos() {
     setFormError('');
   }
 
-  function handleSubmit(event) {
+    async function handleSubmit(event) {
     event.preventDefault();
     if (selectedProducts.length === 0) {
       setFormError('Agrega al menos un producto para continuar.');
@@ -61,11 +61,32 @@ function Pedidos() {
       observaciones: formData.get('observaciones'),
     };
 
-    // En la versión SQL, enviar este pedido a la API para crear el registro de Pedido
-    // y asociar sus productos mediante la tabla de detalle correspondiente.
-    setConfirmation(order);
-    setFormError('');
+    try {
+      const response = await fetch('http://localhost:4000/api/pedidos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setConfirmation(order);
+        setFormError('');
+        // Opcional: limpiar el formulario o redireccionar
+        event.target.reset();
+        setQuantities({});
+      } else {
+        setFormError(result.error || 'Error al enviar el pedido.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setFormError('Error de conexión con el servidor.');
+    }
   }
+
 
   return (
     <section className="content-page order-page">
@@ -147,9 +168,10 @@ function Pedidos() {
               El envío y la disponibilidad se confirman al coordinar el pedido.
             </p>
             {formError && <p className="form-message form-error" role="alert">{formError}</p>}
-            <button className="button button-primary submit-order-button" type="submit">
-              Revisar pedido
+                        <button className="button button-primary submit-order-button" type="submit">
+              Confirmar pedido
             </button>
+
             <p className="frontend-note">Formulario de demostración: no se enviará ni guardará el pedido.</p>
           </aside>
         </div>
