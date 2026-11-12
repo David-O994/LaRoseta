@@ -12,6 +12,7 @@ const sequelize = new Sequelize(
 );
 
 const Pedido = sequelize.define('Pedido', {
+  // codigoSeguimiento: { type: DataTypes.STRING, unique: true, allowNull: false }, // trackeo?
   fechaPedido: { type: DataTypes.DATEONLY, allowNull: false },
   estado: { type: DataTypes.STRING, defaultValue: 'Pendiente' },
   total: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
